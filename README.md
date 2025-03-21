@@ -1,13 +1,19 @@
+```markdown
 # Woodland Creatures API
 
-Base URL: `http://localhost:8080/woodlandcreatures`
+A Spring Boot REST API for managing woodland creatures.
+
+### 🔗 Base URL
+```
+http://localhost:8080/woodlandcreatures
+```
 
 ---
 
-### **/all** (GET)  
-Returns a list of all woodland creatures in the database.
+### **GET /all**  
+Returns a list of all woodland creatures.
 
-**Response – A JSON array of WoodlandCreature objects**  
+**Response**
 ```json
 [
   {
@@ -19,42 +25,36 @@ Returns a list of all woodland creatures in the database.
     "wCWeight": 25.0,
     "woodlandCreatureLocation": "Forests and mountains",
     "wCLifeExpectancy": 15.0
-  },
-  ...
+  }
 ]
 ```
 
 ---
 
-### **/{creatureId}** (GET)  
-Gets an individual woodland creature by ID.
+### **GET /{creatureId}**  
+Returns one creature by ID.
 
-**Parameters**  
-- Path Variable: `creatureId` `<integer>` — **REQUIRED**
+**Path Variable**
+- `creatureId`: `<int>` — Required
 
-**Response – A single WoodlandCreature**  
+**Response**
 ```json
 {
   "woodlandCreatureID": 1,
   "wCDescription": "A medium-sized wild cat with tufted ears.",
-  "wCSpecies": "Lynx",
-  "wCSubSpecies": "Eurasian Lynx",
-  "wCHeight": 2.1,
-  "wCWeight": 25.0,
-  "woodlandCreatureLocation": "Forests and mountains",
-  "wCLifeExpectancy": 15.0
+  ...
 }
 ```
 
 ---
 
-### **/description** (GET)  
-Finds creatures whose description contains a given search keyword.
+### **GET /description?search=keyword**  
+Returns all creatures with the keyword in their description.
 
-**Parameters**  
-- Query parameter: `search` `<string>` — **REQUIRED**
+**Query Param**
+- `search`: `<string>` — Required
 
-**Response – A list of WoodlandCreature objects**  
+**Response**
 ```json
 [
   {
@@ -67,13 +67,13 @@ Finds creatures whose description contains a given search keyword.
 
 ---
 
-### **/species/{species}** (GET)  
-Finds all creatures matching a given species.
+### **GET /species/{species}**  
+Returns all creatures of a specific species.
 
-**Parameters**  
-- Path Variable: `species` `<string>` — **REQUIRED**
+**Path Variable**
+- `species`: `<string>` — Required
 
-**Response – A list of WoodlandCreature objects**  
+**Response**
 ```json
 [
   {
@@ -86,13 +86,13 @@ Finds all creatures matching a given species.
 
 ---
 
-### **/tall** (GET)  
-Finds all creatures taller than a specified height.
+### **GET /tall?height=number**  
+Returns all creatures taller than the given height.
 
-**Parameters**  
-- Query parameter: `height` `<double>` — **REQUIRED**
+**Query Param**
+- `height`: `<double>` — Required
 
-**Response – A list of WoodlandCreature objects**  
+**Response**
 ```json
 [
   {
@@ -105,10 +105,10 @@ Finds all creatures taller than a specified height.
 
 ---
 
-### **/new** (POST)  
+### **POST /new**  
 Adds a new creature to the database.
 
-**Request Body – JSON**
+**Request Body**
 ```json
 {
   "wCDescription": "A stealthy forest predator.",
@@ -121,7 +121,7 @@ Adds a new creature to the database.
 }
 ```
 
-**Response – the added WoodlandCreature**
+**Response**
 ```json
 {
   "woodlandCreatureID": 26,
@@ -130,15 +130,17 @@ Adds a new creature to the database.
 }
 ```
 
+> ✅ Field names are case-sensitive and must match exactly (e.g. `wCSpecies`, not `wcspecies`).
+
 ---
 
-### **/update/{creatureId}** (POST or PUT)  
-Updates an existing creature.
+### **PUT /update/{creatureId}**  
+Updates an existing creature by ID.
 
-**Parameters**  
-- Path Variable: `creatureId` `<integer>` — **REQUIRED**
+**Path Variable**
+- `creatureId`: `<int>` — Required
 
-**Request Body – JSON**
+**Request Body**
 ```json
 {
   "wCDescription": "Updated description.",
@@ -151,7 +153,7 @@ Updates an existing creature.
 }
 ```
 
-**Response – the updated WoodlandCreature**
+**Response**
 ```json
 {
   "woodlandCreatureID": 5,
@@ -161,13 +163,15 @@ Updates an existing creature.
 
 ---
 
-### **/delete/{creatureId}** (GET or DELETE)  
-Deletes a creature by its ID.
+### **DELETE /delete/{creatureId}**  
+Deletes a creature by ID.
 
-**Parameters**  
-- Path Variable: `creatureId` `<integer>` — **REQUIRED**
+**Path Variable**
+- `creatureId`: `<int>` — Required
 
-**Response – Success message**
+**Response**
 ```text
 Creature deleted
 ```
+
+---
