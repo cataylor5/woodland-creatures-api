@@ -1,4 +1,3 @@
-```markdown
 # Woodland Creatures API
 
 A Spring Boot REST API for managing woodland creatures.
