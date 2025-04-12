@@ -10,10 +10,10 @@ import java.util.Optional;
  * WCService.java
  * Centralizes data access to the Woodland Creatures database.
  */
-@Service // Marks this class as a service component in the Spring application
+@Service
 public class WCService {
 
-    @Autowired // Injects the WCRepository dependency
+    @Autowired
     private WCRepository wcRepository;
 
     /**
@@ -85,18 +85,18 @@ public class WCService {
 
         if (optionalCreature.isPresent()) {
             WoodlandCreatures existing = optionalCreature.get();
-            existing.setWCDescription(updatedCreature.getWCDescription());
-            existing.setWCSpecies(updatedCreature.getWCSpecies());
-            existing.setWCSubSpecies(updatedCreature.getWCSubSpecies());
-            existing.setWCHeight(updatedCreature.getWCHeight());
-            existing.setWCWeight(updatedCreature.getWCWeight());
-            existing.setWoodlandCreatureLocation(updatedCreature.getWoodlandCreatureLocation());
-            existing.setWCLifeExpectancy(updatedCreature.getWCLifeExpectancy());
+            existing.setWcdescription(updatedCreature.getWcdescription());
+            existing.setWcspecies(updatedCreature.getWcspecies());
+            existing.setWcsub_species(updatedCreature.getWcsub_species()); // <-- fixed
+            existing.setWcheight(updatedCreature.getWcheight());
+            existing.setWcweight(updatedCreature.getWcweight());
+            existing.setWoodland_creature_location(updatedCreature.getWoodland_creature_location()); // <-- fixed
+            existing.setWclife_expectancy(updatedCreature.getWclife_expectancy()); // <-- fixed
 
-            // Save the updated entity back to the database
             wcRepository.save(existing);
         }
     }
+
 
     /**
      * Delete a unique Woodland Creature.

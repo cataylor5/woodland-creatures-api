@@ -1,82 +1,95 @@
 package com.woodland.creatures.WoodlandCreatures_api.WoodlandCreatures;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller; // <-- Change: using @Controller now, not @RestController
+import org.springframework.ui.Model; // <-- Change: added to support Model attributes
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller // returns name of the webpage now
+@Controller
 @RequestMapping("/woodlandcreatures")
 public class WCController {
 
     @Autowired
     private WCService service;
 
-    // Get all creatures
+    // GET all creatures
     @GetMapping("/all")
-    public ResponseEntity<List<WoodlandCreatures>> getAllCreatures() {
-        return new ResponseEntity<>(service.getAllCreatures(), HttpStatus.OK);
+    public String getAllCreatures(Model model) {
+        model.addAttribute("creatureList", service.getAllCreatures());
+        return "animal-list"; // <-- matches the .ftlh file name (without .ftlh extension)
     }
 
-    // Get creature by ID
+
+    // GET creature by ID
     @GetMapping("/{creatureId}")
-    public ResponseEntity<?> getOneCreature(@PathVariable int creatureId) {
+    public String getOneCreature(@PathVariable int creatureId, Model model) { // <-- Change: Return String and use Model
         WoodlandCreatures creature = service.getCreatureById(creatureId);
         if (creature == null) {
-            return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
+            return "error"; // <-- Change: Return error page if not found
         }
-        return new ResponseEntity<>(creature, HttpStatus.OK);
+        model.addAttribute("creature", creature); // <-- Change: Attach creature to model
+        return "animal-details"; // <-- Change: Return the view name
     }
 
-    // Get creatures by species
+    // GET creatures by species
     @GetMapping("/species/{species}")
-    public ResponseEntity<List<WoodlandCreatures>> getCreaturesBySpecies(@PathVariable String species) {
-        return new ResponseEntity<>(service.getCreaturesBySpecies(species), HttpStatus.OK);
+    public String getCreaturesBySpecies(@PathVariable String species, Model model) { // <-- Change: Return String and use Model
+        model.addAttribute("creatureList", service.getCreaturesBySpecies(species)); // <-- Change: Attach list
+        return "animal-list"; // <-- Change: Return the view name
     }
 
-    // Get creatures taller than a given height
+    // GET creatures taller than a height
     @GetMapping("/tall")
-    public ResponseEntity<List<WoodlandCreatures>> getTallCreatures(
-            @RequestParam(name = "height", defaultValue = "0") double height) {
-        return new ResponseEntity<>(service.getTallCreatures(height), HttpStatus.OK);
+    public String getTallCreatures(@RequestParam(name = "height", defaultValue = "0") double height, Model model) { // <-- Change
+        model.addAttribute("creatureList", service.getTallCreatures(height)); // <-- Change
+        return "animal-list"; // <-- Change
     }
 
-    // Get creatures by description search
+    // GET creatures by description search
     @GetMapping("/description")
-    public ResponseEntity<List<WoodlandCreatures>> getCreaturesByName(
-            @RequestParam(name = "search", defaultValue = "") String search) {
-        return new ResponseEntity<>(service.getCreaturesByName(search), HttpStatus.OK);
+    public String getCreaturesByName(@RequestParam(name = "search", defaultValue = "") String search, Model model) { // <-- Change
+        model.addAttribute("creatureList", service.getCreaturesByName(search)); // <-- Change
+        return "animal-list"; // <-- Change
     }
 
+    // Show form to create a creature
+    @GetMapping("/createForm")
+    public String showCreateForm(Model model) { // <-- Change: Added form endpoint
+        model.addAttribute("creature", new WoodlandCreatures()); // <-- Change: Attach empty object
+        return "animal-create"; // <-- Change: Return the view for create
+    }
+
+    // POST new creature (submit form)
     @PostMapping("/new")
-    public ResponseEntity<WoodlandCreatures> addNewCreature(@RequestBody WoodlandCreatures creature) {
+    public String addNewCreature(@ModelAttribute WoodlandCreatures creature) { // <-- Change: Use @ModelAttribute instead of @RequestBody
         service.addNewCreature(creature);
-        return new ResponseEntity<>(creature, HttpStatus.CREATED);
+        return "redirect:/woodlandcreatures/all"; // <-- Change: Redirect after creation
     }
 
+    // Show form to update a creature
+    @GetMapping("/update/{creatureId}")
+    public String showUpdateForm(@PathVariable int creatureId, Model model) { // <-- Change
+        WoodlandCreatures creature = service.getCreatureById(creatureId);
+        if (creature == null) {
+            return "error"; // <-- Change
+        }
+        model.addAttribute("creature", creature); // <-- Change
+        return "animal-update"; // <-- Change
+    }
 
-    // Update an existing creature
+    // POST updated creature (submit form)
     @PostMapping("/update/{creatureId}")
-    public ResponseEntity<?> updateCreature(@PathVariable int creatureId, @RequestBody WoodlandCreatures creature) {
-        WoodlandCreatures existing = service.getCreatureById(creatureId);
-        if (existing == null) {
-            return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
-        }
+    public String updateCreature(@PathVariable int creatureId, @ModelAttribute WoodlandCreatures creature) { // <-- Change
         service.updateCreature(creatureId, creature);
-        return new ResponseEntity<>(creature, HttpStatus.OK);
+        return "redirect:/woodlandcreatures/" + creatureId; // <-- Change
     }
 
-    // Delete a creature by ID
-    @DeleteMapping("/delete/{creatureId}")
-    public ResponseEntity<?> deleteCreatureById(@PathVariable int creatureId) {
-        WoodlandCreatures existing = service.getCreatureById(creatureId);
-        if (existing == null) {
-            return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
-        }
+    // GET delete creature
+    @GetMapping("/delete/{creatureId}")
+    public String deleteCreatureById(@PathVariable int creatureId) { // <-- Change: GET instead of DELETE
         service.deleteCreatureById(creatureId);
-        return new ResponseEntity<>("Creature deleted", HttpStatus.OK);
+        return "redirect:/woodlandcreatures/all"; // <-- Change: Redirect after delete
     }
 }

@@ -12,128 +12,128 @@ public class WoodlandCreatures {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "woodlandCreatureID")
-    @JsonProperty("woodlandCreatureID")
-    private int woodlandCreatureID;
+    @Column(name = "woodlandcreatureid")  // lowercase matches database
+    @JsonProperty("woodlandcreatureid")
+    private int woodlandcreatureid;
 
-    @Column(name = "wCDescription", nullable = false)
-    @JsonProperty("wCDescription")
-    private String wCDescription;
+    @Column(name = "wcdescription", nullable = false)
+    @JsonProperty("wcdescription")
+    private String wcdescription;
 
-    @Column(name = "wCSpecies", nullable = false)
-    @JsonProperty("wCSpecies, wcspecies")
-    private String wCSpecies;
+    @Column(name = "wcspecies", nullable = false)
+    @JsonProperty("wcspecies")
+    private String wcspecies;
 
-    @Column(name = "wCSubSpecies")
-    @JsonProperty("wCSubSpecies")
-    private String wCSubSpecies;
+    @Column(name = "wcsub_species")
+    @JsonProperty("wcsub_species")
+    private String wcsub_species;
 
-    @Column(name = "wCHeight")
-    @JsonProperty("wCHeight")
-    private double wCHeight;
+    @Column(name = "wcheight")
+    @JsonProperty("wcheight")
+    private double wcheight;
 
-    @Column(name = "wCWeight")
-    @JsonProperty("wCWeight")
-    private double wCWeight;
+    @Column(name = "wcweight")
+    @JsonProperty("wcweight")
+    private double wcweight;
 
-    @Column(name = "woodlandCreatureLocation")
-    @JsonProperty("woodlandCreatureLocation")
-    private String woodlandCreatureLocation;
+    @Column(name = "woodland_creature_location")
+    @JsonProperty("woodland_creature_location")
+    private String woodland_creature_location;
 
-    @Column(name = "wCLifeExpectancy")
-    @JsonProperty("wCLifeExpectancy")
-    private double wCLifeExpectancy;
+    @Column(name = "wclife_expectancy")
+    @JsonProperty("wclife_expectancy")
+    private double wclife_expectancy;
 
     // ----------- Constructors -----------
 
-    public WoodlandCreatures(int woodlandCreatureID, String wCDescription, String wCSpecies, String wCSubSpecies,
-                             double wCHeight, double wCWeight, String woodlandCreatureLocation, double wCLifeExpectancy) {
-        this.woodlandCreatureID = woodlandCreatureID;
-        this.wCDescription = wCDescription;
-        this.wCSpecies = wCSpecies;
-        this.wCSubSpecies = wCSubSpecies;
-        this.wCHeight = wCHeight;
-        this.wCWeight = wCWeight;
-        this.woodlandCreatureLocation = woodlandCreatureLocation;
-        this.wCLifeExpectancy = wCLifeExpectancy;
+    public WoodlandCreatures(int woodlandcreatureid, String wcdescription, String wcspecies, String wcsub_species,
+                             double wcheight, double wcweight, String woodland_creature_location, double wclife_expectancy) {
+        this.woodlandcreatureid = woodlandcreatureid;
+        this.wcdescription = wcdescription;
+        this.wcspecies = wcspecies;
+        this.wcsub_species = wcsub_species;
+        this.wcheight = wcheight;
+        this.wcweight = wcweight;
+        this.woodland_creature_location = woodland_creature_location;
+        this.wclife_expectancy = wclife_expectancy;
     }
 
-    public WoodlandCreatures(String wCDescription, String wCSpecies, String wCSubSpecies,
-                             double wCHeight, double wCWeight, String woodlandCreatureLocation, double wCLifeExpectancy) {
-        this.wCDescription = wCDescription;
-        this.wCSpecies = wCSpecies;
-        this.wCSubSpecies = wCSubSpecies;
-        this.wCHeight = wCHeight;
-        this.wCWeight = wCWeight;
-        this.woodlandCreatureLocation = woodlandCreatureLocation;
-        this.wCLifeExpectancy = wCLifeExpectancy;
+    public WoodlandCreatures(String wcdescription, String wcspecies, String wcsub_species,
+                             double wcheight, double wcweight, String woodland_creature_location, double wclife_expectancy) {
+        this.wcdescription = wcdescription;
+        this.wcspecies = wcspecies;
+        this.wcsub_species = wcsub_species;
+        this.wcheight = wcheight;
+        this.wcweight = wcweight;
+        this.woodland_creature_location = woodland_creature_location;
+        this.wclife_expectancy = wclife_expectancy;
     }
 
     public WoodlandCreatures() {}
 
     // ----------- Getters and Setters -----------
 
-    public int getWoodlandCreatureID() {
-        return woodlandCreatureID;
+    public int getWoodlandcreatureid() {
+        return woodlandcreatureid;
     }
 
-    public void setWoodlandCreatureID(int woodlandCreatureID) {
-        this.woodlandCreatureID = woodlandCreatureID;
+    public void setWoodlandcreatureid(int woodlandcreatureid) {
+        this.woodlandcreatureid = woodlandcreatureid;
     }
 
-    public String getWCDescription() {
-        return wCDescription;
+    public String getWcdescription() {
+        return wcdescription;
     }
 
-    public void setWCDescription(String wCDescription) {
-        this.wCDescription = wCDescription;
+    public void setWcdescription(String wcdescription) {
+        this.wcdescription = wcdescription;
     }
 
-    public String getWCSpecies() {
-        return wCSpecies;
+    public String getWcspecies() {
+        return wcspecies;
     }
 
-    public void setWCSpecies(String wCSpecies) {
-        this.wCSpecies = wCSpecies;
+    public void setWcspecies(String wcspecies) {
+        this.wcspecies = wcspecies;
     }
 
-    public String getWCSubSpecies() {
-        return wCSubSpecies;
+    public String getWcsub_species() {
+        return wcsub_species;
     }
 
-    public void setWCSubSpecies(String wCSubSpecies) {
-        this.wCSubSpecies = wCSubSpecies;
+    public void setWcsub_species(String wcsub_species) {
+        this.wcsub_species = wcsub_species;
     }
 
-    public double getWCHeight() {
-        return wCHeight;
+    public double getWcheight() {
+        return wcheight;
     }
 
-    public void setWCHeight(double wCHeight) {
-        this.wCHeight = wCHeight;
+    public void setWcheight(double wcheight) {
+        this.wcheight = wcheight;
     }
 
-    public double getWCWeight() {
-        return wCWeight;
+    public double getWcweight() {
+        return wcweight;
     }
 
-    public void setWCWeight(double wCWeight) {
-        this.wCWeight = wCWeight;
+    public void setWcweight(double wcweight) {
+        this.wcweight = wcweight;
     }
 
-    public String getWoodlandCreatureLocation() {
-        return woodlandCreatureLocation;
+    public String getWoodland_creature_location() {
+        return woodland_creature_location;
     }
 
-    public void setWoodlandCreatureLocation(String woodlandCreatureLocation) {
-        this.woodlandCreatureLocation = woodlandCreatureLocation;
+    public void setWoodland_creature_location(String woodland_creature_location) {
+        this.woodland_creature_location = woodland_creature_location;
     }
 
-    public double getWCLifeExpectancy() {
-        return wCLifeExpectancy;
+    public double getWclife_expectancy() {
+        return wclife_expectancy;
     }
 
-    public void setWCLifeExpectancy(double wCLifeExpectancy) {
-        this.wCLifeExpectancy = wCLifeExpectancy;
+    public void setWclife_expectancy(double wclife_expectancy) {
+        this.wclife_expectancy = wclife_expectancy;
     }
 }
