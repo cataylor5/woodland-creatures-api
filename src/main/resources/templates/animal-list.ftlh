@@ -7,6 +7,16 @@
 <body>
 <h1>All Woodland Creatures</h1>
 
+<form action="/woodlandcreatures/all" method="get" style="display: inline;">
+    <button type="submit">🏡 Show All</button>
+</form>
+
+
+<form action="/woodlandcreatures/description" method="get">
+    <input type="text" name="search" placeholder="Search by description...">
+    <button type="submit">🔍 Search</button>
+</form>
+
 <a href="/woodlandcreatures/createForm">➕ Create New Animal</a>
 
 <table border="1" cellpadding="8">

@@ -7,6 +7,7 @@
 <body>
 <h1>Animal Details</h1>
 
+
 <h2>${creature.wcspecies} - ${creature.wcsub_species}</h2>
 
 <p><strong>Description:</strong> ${creature.wcdescription}</p>
